@@ -1,10 +1,16 @@
 import { Leaf, RotateCcw } from "lucide-react";
 import { FootprintProvider, useFootprint } from "./context/FootprintContext";
 import { formatCo2e } from "../utils/emissionsMath";
+import { lazy, Suspense } from "react";
 import { MetricCards } from "./components/dashboard/MetricCards";
-import { ComparisonGauge } from "./components/dashboard/ComparisonGauge";
-import { DistributionChart } from "./components/dashboard/DistributionChart";
-import { CategoryComparisonChart } from "./components/dashboard/CategoryComparisonChart";
+
+const ComparisonGauge = lazy(() => import("./components/dashboard/ComparisonGauge").then(m => ({ default: m.ComparisonGauge })));
+const DistributionChart = lazy(() => import("./components/dashboard/DistributionChart").then(m => ({ default: m.DistributionChart })));
+const CategoryComparisonChart = lazy(() => import("./components/dashboard/CategoryComparisonChart").then(m => ({ default: m.CategoryComparisonChart })));
+
+function ChartFallback() {
+  return <div className="grid h-64 place-items-center rounded-xl border bg-card text-muted-foreground animate-pulse">Loading chart...</div>;
+}
 import { Recommendations } from "./components/recommendations/Recommendations";
 import { EnergyTracker } from "./components/trackers/EnergyTracker";
 import { TransportTracker } from "./components/trackers/TransportTracker";
@@ -78,13 +84,17 @@ function Layout() {
 
           <section aria-label="Insights" className="space-y-4">
             <h2>Insights</h2>
-            <ComparisonGauge />
-            <DistributionChart />
+            <Suspense fallback={<ChartFallback />}>
+              <ComparisonGauge />
+              <DistributionChart />
+            </Suspense>
           </section>
         </div>
 
         <section aria-label="Category comparison">
-          <CategoryComparisonChart />
+          <Suspense fallback={<ChartFallback />}>
+            <CategoryComparisonChart />
+          </Suspense>
         </section>
 
         <section aria-label="Recommendations">
