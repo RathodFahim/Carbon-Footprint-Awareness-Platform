@@ -118,30 +118,9 @@ Expected: **21 tests passing.**
 
 ## ☁️ Deploying to Vercel
 
-This project runs inside Figma Make using an auto-generated entrypoint, so it
-has **no `index.html`** (Figma blocks creating one). After exporting the code to
-your own GitHub repo, add the single file below to make it a standard,
-Vercel-deployable Vite app. Everything else (`src/main.tsx`, `vite.config.ts`,
-`react`/`react-dom` in dependencies, build scripts) is already set up.
+The application is fully configured for seamless deployment on Vercel. We've included a `vercel.json` file in the root directory to handle client-side routing (React Router) properly.
 
-**1. Create `index.html` in the repo root:**
-
-```html
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Carbon Footprint Tracker</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
-```
-
-**2. Verify the build locally (optional):**
+**1. Verify the build locally (optional):**
 
 ```bash
 pnpm install
@@ -149,16 +128,17 @@ pnpm build        # outputs to dist/
 pnpm preview      # serves the production build
 ```
 
-**3. Deploy on Vercel:**
+**2. Deploy on Vercel:**
 
-1. Push the repo to GitHub.
-2. Vercel → **Add New Project** → import the repo.
-3. Settings (Vercel auto-detects most of these):
+1. Push your repository to GitHub.
+2. Go to the [Vercel Dashboard](https://vercel.com/new).
+3. Click **Add New Project** and import your repository.
+4. Settings (Vercel will auto-detect Vite):
    - **Framework Preset:** Vite
    - **Build Command:** `pnpm build`
    - **Output Directory:** `dist`
    - **Install Command:** `pnpm install`
-4. Click **Deploy**. Done — Vercel gives you a live `*.vercel.app` URL.
+5. Click **Deploy**. Done — Vercel gives you a live `*.vercel.app` URL.
 
 ---
 
