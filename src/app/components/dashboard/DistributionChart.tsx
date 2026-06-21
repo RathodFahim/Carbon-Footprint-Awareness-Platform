@@ -53,6 +53,7 @@ export function DistributionChart() {
                 paddingAngle={2}
                 stroke="var(--background)"
                 strokeWidth={2}
+                isAnimationActive={false}
               >
                 {data.map((entry, i) => (
                   <Cell key={entry.name} fill={COLORS[i % COLORS.length]} />
