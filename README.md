@@ -1,5 +1,7 @@
 # 🌱 Carbon Footprint Tracker
 
+**[🚀 View Live Demo](https://carbon-footprint-awareness-platform-iota.vercel.app/)**
+
 A production-ready **Carbon Footprint Awareness Platform** that tracks individual
 environmental impact using rigorous greenhouse-gas math and delivers dynamic,
 quantified, behaviorally-designed recommendations.
